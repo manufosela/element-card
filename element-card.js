@@ -21,6 +21,7 @@ class ElementCard extends LitElement {
       cover: { type: String },
       coverBgColor: { type: String },
       textColor: { type: String },
+      imgcover:{ type:String },
     }
   }
 
@@ -35,26 +36,33 @@ class ElementCard extends LitElement {
       this.renderRoot.querySelector(".element-ctr").classList.add('showDesc');
 
     });
-    this.title = "Javascript";
-    this.description = "Advocate. ES6, ES7, functional programming";
+    this.title = "Element-card";
+    this.description = "Description from element-card";
     this.navlist = {
-      title: "YEARS EXPERIENCE",
-      value: ">10",
-      list: "<3,3-5,5-10,>10",
+      title: "NAVLIST",
+      value: "3",
+      list: "1,2,3,4,5",
       fixed: "true"
     }
     this.circlepercent = {
-      percent: 100,
-      title: "REFERENCE KNOWLEDGE"
+      percent: 75,
+      title: "PERCENT"
     }
-    this.img_cover = this._getCoverImg();
+    this.img_cover = html`<!--COVER-->`;
     this.coverBgColor = "rgba(0, 0, 0, 0.7)";
     this.textColor = "#FFF";
   }
 
-  _getCoverImg() {
-    let img = (this.img)?html`<img src="${this.img}" alt="${this.title}" style="opacity: 0.3">`:html`<!--COVER-->`;
-    return img;
+  updated(mapVar) {
+    let navlist = mapVar.get("navlist");
+    if (!navlist) {
+      this.navlist=JSON.parse(this.navlist);
+      this.circlepercent=JSON.parse(this.circlepercent);
+    }
+    let imgcover = mapVar.get("imgcover");
+    if (!imgcover) {
+      this.img_cover = (this.imgcover)?html`<img src="${this.imgcover}" alt="${this.title}" style="opacity: 0.3">`:html`<!--COVER-->`;
+    }
   }
 
   render() {
@@ -64,8 +72,10 @@ class ElementCard extends LitElement {
       display: block;
       font-family: "Uni Sans", sans-serif;
       font-weight: 500;
+      margin: 30px;
     }
     .element-card {
+      padding:60px 0 60px 0;
       height: 100%;
       display: flex;
       align-items: center;
@@ -74,6 +84,8 @@ class ElementCard extends LitElement {
       overflow: hidden;
       position: relative;
       border-radius: 30px;
+      box-shadow: 0 28px 79px 0 rgba(10, 22, 31, 0.35);
+      max-width: 1200px;
     }
     @media screen and (max-width: 992px) {
       .element-card {
@@ -119,19 +131,16 @@ class ElementCard extends LitElement {
     @media screen and (max-width: 992px) {
       .element-content {
         padding: 20px 60px 100px;
-        padding-top: 280px;
         text-align: center;
       }
     }
     @media screen and (max-width: 767px) {
       .element-content {
         padding: 20px 30px 50px;
-        padding-top: 300px;
       }
     }
     @media screen and (max-width: 576px) {
       .element-content {
-        padding-top: 220px;
         padding-left: 15px;
         padding-right: 15px;
       }
