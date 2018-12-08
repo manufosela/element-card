@@ -8,19 +8,59 @@
 
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <script type="module" src="../element-card.js"></script>
+    <style>
+      #second {
+        --imgcover-max-width:20%;
+        --imgcover-opacity:0.3;
+      }
+      .group2 {
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+      }
+      .group1 {
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+      }
+    </style>
   </head>
   <body>
     <div class="vertical-section-container centered">
       <h3>Basic element-card demo</h3>
-      <element-card></element-card>
-      <element-card 
+      <element-card id="first"></element-card>
+      <element-card id="second" 
         title="Javascript"
         description="Advocate. ES6, ES7, functional programming"
-        navlist='{"title":"YEARS EXPERIENCE","value":">10","list":"<3,3-5,5-10,>10","fixed":"true"}'
-        circlepercent='{"percent":100,"title":"REFERENCE KNOWLEDGE"}'
         imgcover="/demo/js-logo.png"
         coverBgColor="rgba(255, 255, 0, 0.3)"
         textcolor="#000">
+            <div class="group1" id="uno">
+              <nav-list 
+                title="YEARS EXPERIENCE" 
+                value=">10"
+                list="<3,3-5,5-10,>10"
+                fixed="true">
+              </nav-list>
+              <!--navlist='{"title":"YEARS EXPERIENCE","value":">10","list":"<3,3-5,5-10,>10","fixed":"true"}'-->
+            </div>
+
+            <div class="group2" id="dos">
+              <h3>KNOWLEDGE</h3>
+              <span></span>
+              <circle-percent
+                percent="100"
+                title="REFERENCE KNOWLEDGE">
+              </circle-percent>
+              <circle-percent
+                percent="80"
+                title="FIRST KNOWLEDGE">
+              </circle-percent>
+              <circle-percent
+                percent="70"
+                title="SECOND KNOWLEDGE">
+              </circle-percent>
+            </div>
+
+            TEXTO QUE VA DESPUÉS Y QUE PUEDE IR TAMBIÉN ANTES YA QUE ELEMENT-CARD LO PERMITE
       </element-card>
     </div>
   </body>

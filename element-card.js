@@ -16,8 +16,8 @@ class ElementCard extends LitElement {
     return {
       title: { type: String },
       description: { type: String },
-      navlist: { type: Object },
-      circlepercent: { type: Object },
+      navlist: { type: String },
+      circlepercent: { type: String },
       cover: { type: String },
       coverBgColor: { type: String },
       textColor: { type: String },
@@ -34,34 +34,43 @@ class ElementCard extends LitElement {
       this.renderRoot.querySelector(".element-title").classList.add('showTitle');
       this.renderRoot.querySelector(".element-desc").classList.add('showDesc');
       this.renderRoot.querySelector(".element-ctr").classList.add('showDesc');
-
+      this._addSeparators();
     });
     this.title = "Element-card";
     this.description = "Description from element-card";
-    this.navlist = {
-      title: "NAVLIST",
-      value: "3",
-      list: "1,2,3,4,5",
-      fixed: "true"
-    }
-    this.circlepercent = {
-      percent: 75,
-      title: "PERCENT"
-    }
+    this.navlist = '{ "title": "NAVLIST", "value": "3", "list": "1,2,3,4,5", "fixed": "true" }';
+    this.circlepercent = '{ "percent": 75, "title": "PERCENT" }';
     this.img_cover = html`<!--COVER-->`;
     this.coverBgColor = "rgba(0, 0, 0, 0.7)";
     this.textColor = "#FFF";
   }
 
   updated(mapVar) {
+    let imgcover = mapVar.get("imgcover");
+    if (!imgcover) {
+      this.img_cover = (this.imgcover)?html`<img src="${this.imgcover}" alt="${this.title}">`:html`<!--COVER-->`;
+    }
     let navlist = mapVar.get("navlist");
     if (!navlist) {
       this.navlist=JSON.parse(this.navlist);
       this.circlepercent=JSON.parse(this.circlepercent);
     }
-    let imgcover = mapVar.get("imgcover");
-    if (!imgcover) {
-      this.img_cover = (this.imgcover)?html`<img src="${this.imgcover}" alt="${this.title}" style="opacity: 0.3">`:html`<!--COVER-->`;
+
+  }
+
+  _addSeparators(){
+    let children = Object.assign({}, this.children);
+    console.log(children);
+    let counter = 1;
+    for(let ch in children) {
+      console.log(ch, counter, counter%2);
+      if (counter%2===0) {
+        console.log('inserta separador');
+        let d = document.createElement('span');
+        d.className='hr-vertical';
+        this.insertBefore(d, children[ch]);
+      }
+      counter++;
     }
   }
 
@@ -109,6 +118,11 @@ class ElementCard extends LitElement {
       opacity: 1;
       background-color:${this.coverBgColor};
     }
+    .element-cover img {
+      max-width: var(--imgcover-max-width, 100%);
+      opacity: var(--imgcover-opacity, 1);
+    }
+
     @media screen and (max-width: 767px) {
       .element-cover {
         border-radius: 20px;
@@ -184,7 +198,9 @@ class ElementCard extends LitElement {
       }
     }
     .element-ctr {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      grid-gap: 10px;
       align-items: center;
       min-height: 150px;
       margin-top: 40px;
@@ -196,26 +212,36 @@ class ElementCard extends LitElement {
         justify-content: center;
       }
     }
-    .element-ctr .hr-vertical {
+    ::slotted(.hr-vertical) {
       width: 1px;
       background: #9fa3a7;
       align-self: stretch;
-      margin: 0 35px;
+      margin: 0;
       flex-shrink: 0;
       opacity: 0.5;
     }
     @media screen and (max-width: 767px) {
       .element-ctr {
+        grid-template-columns: 1fr;
         justify-content: center;
         flex-wrap: wrap;
         margin-bottom: 40px;
       }
-      .element-ctr .hr-vertical {
+      ::slotted(.hr-vertical) {
         width: 100%;
         margin: 35px 0;
         height: 1px;
       }
     }
+    .element-inf-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 30px;
+    }
+    .element-inf {
+
+    }
+
     .showTitle {
       opacity: 1;
       transform: translateY(0px);
@@ -239,16 +265,7 @@ class ElementCard extends LitElement {
         ${this.description}
       </span>
       <div class="element-ctr">
-        <div class="element-labels">
-          <nav-list title="${this.navlist.title}" value="${this.navlist.value}" list="${this.navlist.list}" fixed="${this.navlist.fixed}"></nav-list>
-        </div>
-
-        <span class="hr-vertical"></span>
-
-        <div class="element-inf">
-          <circle-percent percent="${this.circlepercent.percent}" title="${this.circlepercent.title}"></circle-percent>
-        </div>
-
+        <slot></slot>
       </div>
 
     </div>
