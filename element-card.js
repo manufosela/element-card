@@ -1,7 +1,5 @@
 import { LitElement, html } from '/node_modules/@polymer/lit-element/lit-element.js';
 import {afterNextRender, beforeNextRender} from '/node_modules/@polymer/polymer/lib/utils/render-status.js';
-import '/node_modules/@manufosela/nav-list/nav-list.js';
-import '/node_modules/@manufosela/circle-percent/circle-percent.js';
 
 /**
  * `element-card`
