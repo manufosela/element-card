@@ -1,7 +1,7 @@
 {
   "name": "@manufosela/element-card",
   "description": "Polymer 3.0 webcomponent with lit-html to draw a card with other elements and information",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "element-card.js",
   "repository": {
     "type": "git",
