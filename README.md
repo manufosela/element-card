@@ -1,6 +1,30 @@
 # \<element-card\>
 
 
+## Demo
+
+<!--
+```
+<custom-element-demo>
+  <template>
+    <script type="module" src="../element-card.js"></script>
+    <script type="module" src="/node_modules/@manufosela/nav-list/nav-list.js"></script>
+    <script type="module" src="/node_modules/@manufosela/circle-percent/circle-percent.js"></script>
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
+  <element-card id="second" 
+        title="Javascript"
+        description="Advocate. ES6, ES7, functional programming"
+        imgcover="https://banner2.kisspng.com/20180429/www/kisspng-javascript-logo-html-comment-blog-5ae63c22d40699.0773573515250381148685.jpg"
+        coverBgColor="rgba(255, 255, 0, 0.3)"
+        textcolor="#000">
+        DEMO TEXT INTO ELEMENT-CARD
+  </element-card>
+```
 
 ## Install the Polymer-CLI
 
