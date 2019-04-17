@@ -1,7 +1,7 @@
 {
   "name": "@manufosela/element-card",
-  "description": "Polymer 3.0 webcomponent with lit-html to draw a card with other elements and information",
-  "version": "1.1.2",
+  "description": "Lit-Element webcomponent to draw a card with other elements and information",
+  "version": "2.0.0",
   "main": "element-card.js",
   "repository": {
     "type": "git",
@@ -18,13 +18,8 @@
   },
   "homepage": "https://github.com/manufosela/element-card",
   "dependencies": {
-    "@polymer/lit-element": "^0.6.1",
-    "@polymer/polymer": "^3.0.0"
-  },
-  "devDependencies": {
-    "@manufosela/circle-percent": "^2.0.2",
-    "@manufosela/nav-list": "^2.1.22",
-    "@polymer/iron-demo-helpers": "^3.0.2",
-    "@webcomponents/webcomponentsjs": "^2.0.0"
+    "@manufosela/circle-percent": "^2.1.1",
+    "@manufosela/nav-list": "^2.4.0",
+    "lit-element": "^2.1.0"
   }
 }
