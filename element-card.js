@@ -1,5 +1,4 @@
-import { LitElement, html } from '/node_modules/lit-element/lit-element.js';
-//import { afterNextRender, beforeNextRender } from '/node_modules/@polymer/polymer/lib/utils/render-status.js';
+import { LitElement, html } from './node_modules/lit-element/lit-element.js';
 
 /**
  * `element-card`
