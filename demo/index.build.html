@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>element-card demo</title>
+    <script type="module" src="../build/element-card.js"></script>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic element-card demo</h3>
+      <element-card id="first"></element-card>
+      <element-card id="second" 
+        title="Javascript"
+        description="Advocate. ES6, ES7, functional programming"
+        imgcover="js-logo.png"
+        coverBgColor="rgba(255, 255, 0, 0.3)"
+        textcolor="#000">
+            <div class="group1" id="uno">
+              <nav-list 
+                title="YEARS EXPERIENCE" 
+                value=">10"
+                list="<3,3-5,5-10,>10"
+                fixed="true">
+              </nav-list>
+            </div>
+
+            <div class="group2" id="dos">
+              <h3>KNOWLEDGE</h3>
+              <span></span>
+              <circle-percent
+                percent="100"
+                title="REFERENCE KNOWLEDGE">
+              </circle-percent>
+              <circle-percent
+                percent="80"
+                title="FIRST KNOWLEDGE">
+              </circle-percent>
+              <circle-percent
+                percent="70"
+                title="SECOND KNOWLEDGE">
+              </circle-percent>
+            </div>
+
+            TEXTO QUE VA DESPUÉS Y QUE PUEDE IR TAMBIÉN ANTES YA QUE ELEMENT-CARD LO PERMITE
+      </element-card>
+    </div>
+  </body>
+</html>
