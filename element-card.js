@@ -1,4 +1,6 @@
-import { LitElement, html } from './node_modules/lit-element/lit-element.js';
+import { LitElement, html } from 'lit-element';
+import '@manufosela/circle-percent';
+import '@manufosela/nav-list';
 
 /**
  * `element-card`
@@ -8,7 +10,7 @@ import { LitElement, html } from './node_modules/lit-element/lit-element.js';
  * @polymer
  * @demo demo/index.html
  */
-class ElementCard extends LitElement {
+export class ElementCard extends LitElement {
   static get properties() {
     return {
       title: { type: String },
