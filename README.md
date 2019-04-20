@@ -24,6 +24,9 @@
         DEMO TEXT INTO ELEMENT-CARD
   </element-card>
 ```
+## CSS Variables
+--imgcover-max-width
+--imgcover-opacity
 
 ## Install the Polymer-CLI
 
@@ -39,6 +42,11 @@ $ polymer serve
 
 ```
 $ polymer test
+```
+
+## Build
+```
+npm run build
 ```
 
 Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
