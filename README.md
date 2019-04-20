@@ -48,7 +48,15 @@ $ polymer test
 
 ## Build
 ```
-npm run build
+$ npm run build
 ```
 
 Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+
+## Author
+
+* **Mánu Fosela** - *Javascript Composer* - [manufosela](https://github.com/manufosela)
+
+## License
+
+This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details
