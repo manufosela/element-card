@@ -2,6 +2,8 @@
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/owner/my-element)
 
 ## Demo
+[element-card codepen demo](https://codepen.io/manufosela/pen/wZXopo)
+
 <!--
 ```
 <custom-element-demo>
