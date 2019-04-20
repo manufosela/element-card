@@ -10,7 +10,7 @@ import '@manufosela/nav-list';
  * @polymer
  * @demo demo/index.html
  */
-export class ElementCard extends LitElement {
+class ElementCard extends LitElement {
   static get properties() {
     return {
       title: { type: String },
