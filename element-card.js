@@ -1,12 +1,10 @@
-import { LitElement, html } from 'lit-element';
-import '@manufosela/circle-percent';
-import '@manufosela/nav-list';
+import { LitElement, html, css } from 'lit-element';
 
 /**
  * `element-card`
  * Element Card
  *
- * @customElement
+ * @customElement element-card
  * @polymer
  * @demo demo/index.html
  */
@@ -18,66 +16,22 @@ class ElementCard extends LitElement {
       navlist: { type: String },
       circlepercent: { type: String },
       cover: { type: String },
-      coverBgColor: { type: String },
-      textColor: { type: String },
-      imgcover:{ type:String },
-    }
+      coverBgColor: { type: String, attribute: 'cover-bgcolor' },
+      textColor: { type: String, attribute: 'text-color' },
+      imgcover: { type: String, attribute: 'img-cover' }
+    };
   }
 
-  constructor() {
-    super();
-    this.title = "Element-card";
-    this.description = "Description from element-card";
-    this.navlist = '{ "title": "NAVLIST", "value": "3", "list": "1,2,3,4,5", "fixed": "true" }';
-    this.circlepercent = '{ "percent": 75, "title": "PERCENT" }';
-    this.img_cover = html`<!--COVER-->`;
-    this.coverBgColor = "rgba(0, 0, 0, 0.7)";
-    this.textColor = "#FFF";
-  }
-
-  updated(mapVar) {
-    let imgcover = mapVar.get("imgcover");
-    if (!imgcover) {
-      this.img_cover = (this.imgcover)?html`<img src="${this.imgcover}" alt="${this.title}">`:html`<!--COVER-->`;
-    }
-    let navlist = mapVar.get("navlist");
-    if (!navlist) {
-      this.navlist=JSON.parse(this.navlist);
-      this.circlepercent=JSON.parse(this.circlepercent);
-    }
-  }
-
-  firstUpdated(){
-    /* DELAY to apply css transform */
-    setTimeout(() => {
-      this.renderRoot.querySelector(".element-title").classList.add('showTitle');
-      this.renderRoot.querySelector(".element-desc").classList.add('showDesc');
-      this.renderRoot.querySelector(".element-ctr").classList.add('showDesc');
-      this._addSeparators();
-    }, 100);
-  }
-
-  _addSeparators(){
-    let children = Object.assign({}, this.children);
-    let counter = 1;
-    for(let ch in children) {
-      if (counter%2===0) {
-        let d = document.createElement('span');
-        d.className='hr-vertical';
-        this.insertBefore(d, children[ch]);
-      }
-      counter++;
-    }
-  }
-
-  render() {
-    return html`
-    <style>
+  static get styles() {
+    return css`
       :host {
         display: block;
         font-family: "Uni Sans", sans-serif;
         font-weight: 500;
         margin: 30px;
+        --imgcover-max-width: 100%;
+        --imgcover-opacity: 1;
+        --fontsize: 16px;
       }
       .element-card {
         padding:60px 0 60px 0;
@@ -91,6 +45,7 @@ class ElementCard extends LitElement {
         border-radius: 30px;
         box-shadow: 0 28px 79px 0 rgba(10, 22, 31, 0.35);
         max-width: 1200px;
+        font-size: var(--fontsize);
       }
       @media screen and (max-width: 992px) {
         .element-card {
@@ -112,11 +67,10 @@ class ElementCard extends LitElement {
         display: block;
         object-fit: cover;
         opacity: 1;
-        background-color:${this.coverBgColor};
       }
       .element-cover img {
-        max-width: var(--imgcover-max-width, 100%);
-        opacity: var(--imgcover-opacity, 1);
+        max-width: var(--imgcover-max-width);
+        opacity: var(--imgcover-opacity);
       }
 
       @media screen and (max-width: 767px) {
@@ -125,7 +79,6 @@ class ElementCard extends LitElement {
         }
       }
       .element-content {
-        color: ${this.textColor};
         padding-top: 1px;
         position: relative;
         z-index: 2;
@@ -159,8 +112,8 @@ class ElementCard extends LitElement {
         margin: 0;
         margin-bottom: 10px;
         font-weight: 900;
-        font-size: 41px;
-        line-height: 1.2em;
+        font-size: 2.625rem;
+        line-height: 1.2rem;
         letter-spacing: 2px;
         opacity: 0;
         transform: translateY(-55px);
@@ -168,17 +121,17 @@ class ElementCard extends LitElement {
 
       @media screen and (max-width: 1200px) {
         .element-title {
-          font-size: 34px;
+          font-size: 2.125rem;
         }
       }
       @media screen and (max-width: 576px) {
         .element-title {
-          font-size: 24px;
+          font-size: 1.5rem;
         }
       }
       .element-desc {
         display: block;
-        font-size: 42px;
+        font-size: 2.625rem;
         opacity: 0;
         transform: translateY(-110px);
       }
@@ -216,6 +169,12 @@ class ElementCard extends LitElement {
         flex-shrink: 0;
         opacity: 0.5;
       }
+      ::slotted(:last-child) {
+        margin-top: 2rem;
+        grid-column-start: 1;
+        grid-column-end: 4;
+        font-size:1.5rem;
+      }
       @media screen and (max-width: 767px) {
         .element-ctr {
           grid-template-columns: 1fr;
@@ -234,9 +193,6 @@ class ElementCard extends LitElement {
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 30px;
       }
-      .element-inf {
-
-      }
 
       .showTitle {
         opacity: 1;
@@ -248,24 +204,75 @@ class ElementCard extends LitElement {
         transform: translateY(0px);
         transition: all 1s;
       }
-    </style>
+    `;
+  }
 
-    <div class="element-card">
-      <div class="element-cover">
-        ${this.img_cover}
-      </div>
-      <div class="element-content">
-        <h1 class="element-title">
-          ${this.title}
-        </h1>
-        <span class="element-desc">
-          ${this.description}
-        </span>
-        <div class="element-ctr">
-          <slot></slot>
+  constructor() {
+    super();
+    this.title = 'Element-card';
+    this.description = 'Description from element-card';
+    this.img_cover = html`<!--COVER-->`;
+    this.coverBgColor = 'rgba(0, 0, 0, 0.7)';
+    this.textColor = '#FFF';
+  }
+
+  firstUpdated() {
+    /* 100ms DELAY to apply css transform */
+    setTimeout(() => {
+      this.renderRoot.querySelector('.element-title').classList.add('showTitle');
+      this.renderRoot.querySelector('.element-desc').classList.add('showDesc');
+      this.renderRoot.querySelector('.element-ctr').classList.add('showDesc');
+      this._addSeparators();
+      if (this.imgcover) {
+        this.shadowRoot.querySelector('.element-cover').innerHTML = `<img src="${this.imgcover}" alt="${this.title}">`;
+      }
+    }, 100);
+  }
+
+  _addSeparators() {
+    let children = Object.assign({}, this.children);
+    let counter = 1;
+    for (let ch in children) {
+      if (children.hasOwnProperty(ch)) {
+        if (counter % 2 === 0) {
+          let d = document.createElement('span');
+          d.className = 'hr-vertical';
+          this.insertBefore(d, children[ch]);
+        }
+        counter++;
+      }
+    }
+  }
+
+  render() {
+    return html`
+      <style>
+        .element-cover {
+          background-color:${this.coverBgColor};
+        }
+        .element-content {
+          color: ${this.textColor};
+        }
+        .element-desc, .element-title {
+          text-align: ${(this.imgcover) ? 'center' : 'left' };
+        }
+      </style>
+      <div class="element-card">
+        <div class="element-cover">
+          ${this.img_cover}
+        </div>
+        <div class="element-content">
+          <h1 class="element-title">
+            ${this.title}
+          </h1>
+          <span class="element-desc">
+            ${this.description}
+          </span>
+          <div class="element-ctr">
+            <slot></slot>
+          </div>
         </div>
       </div>
-    </div>
     `;
   }
 }
