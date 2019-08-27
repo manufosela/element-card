@@ -13,8 +13,6 @@ class ElementCard extends LitElement {
     return {
       title: { type: String },
       description: { type: String },
-      navlist: { type: String },
-      circlepercent: { type: String },
       cover: { type: String },
       coverBgColor: { type: String, attribute: 'cover-bgcolor' },
       textColor: { type: String, attribute: 'text-color' },
