@@ -1,7 +1,7 @@
 {
   "name": "@manufosela/element-card",
   "description": "Lit-Element webcomponent to draw a card with other elements and information",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "main": "element-card.js",
   "repository": {
     "type": "git",
