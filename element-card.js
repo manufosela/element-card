@@ -65,10 +65,13 @@ class ElementCard extends LitElement {
         display: block;
         object-fit: cover;
         opacity: 1;
+        text-align: left;
+        padding: 15px;
       }
       .element-cover img {
         max-width: var(--imgcover-max-width, 100%);
         opacity: var(--imgcover-opacity, 1);
+        border-radius: 10px;
       }
 
       @media screen and (max-width: 767px) {
