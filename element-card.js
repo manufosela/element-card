@@ -29,13 +29,11 @@ class ElementCard extends LitElement {
         font-family: "Uni Sans", sans-serif;
         font-weight: 500;
         margin: 30px;
-        --imgcover-max-width: 100%;
-        --imgcover-opacity: 1;
-        --fontsize: 16px;
+        font-size: var(--font-size, 16px);
       }
       .element-card {
         padding:60px 0 60px 0;
-        height: 100%;
+        /*height: 100%;*/
         display: flex;
         align-items: center;
         width: 100%;
@@ -45,7 +43,7 @@ class ElementCard extends LitElement {
         border-radius: 30px;
         box-shadow: 0 28px 79px 0 rgba(10, 22, 31, 0.35);
         max-width: 1200px;
-        font-size: var(--fontsize);
+        font-size: 1rem;
       }
       @media screen and (max-width: 992px) {
         .element-card {
@@ -69,8 +67,8 @@ class ElementCard extends LitElement {
         opacity: 1;
       }
       .element-cover img {
-        max-width: var(--imgcover-max-width);
-        opacity: var(--imgcover-opacity);
+        max-width: var(--imgcover-max-width, 100%);
+        opacity: var(--imgcover-opacity, 1);
       }
 
       @media screen and (max-width: 767px) {
@@ -79,6 +77,7 @@ class ElementCard extends LitElement {
         }
       }
       .element-content {
+        font-size:1rem;
         padding-top: 1px;
         position: relative;
         z-index: 2;
@@ -112,7 +111,7 @@ class ElementCard extends LitElement {
         margin: 0;
         margin-bottom: 10px;
         font-weight: 900;
-        font-size: 2.625rem;
+        font-size: 3rem;
         line-height: 1.2rem;
         letter-spacing: 2px;
         opacity: 0;
@@ -138,12 +137,12 @@ class ElementCard extends LitElement {
 
       @media screen and (max-width: 1200px) {
         .element-desc {
-          font-size: 36px;
+          font-size: 2rem;
         }
       }
       @media screen and (max-width: 576px) {
         .element-desc {
-          font-size: 30px;
+          font-size: 1.2rem;
         }
       }
       .element-ctr {
