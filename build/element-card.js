@@ -2548,271 +2548,10 @@ LitElement.finalized = true;
 LitElement.render = render$1;
 
 /**
- * `circle-percent`
- * Circle Percent
- *
- * @customElement
- * @polymer
- * @demo demo/index.html
- */
-
-class CirclePercent extends LitElement {
-  static get properties() {
-    return {
-      title: {
-        type: String
-      },
-      percent: {
-        type: Number
-      },
-      radio: {
-        type: Number
-      },
-      swidth: {
-        type: Number
-      },
-      scolor: {
-        type: String
-      },
-      _dasharray: {
-        type: String
-      }
-    };
-  }
-
-  static get styles() {
-    return css`
-      svg { transform: rotateX(180deg) rotateY(180deg); }
-      .circle-inf {
-        text-align: center;
-      }
-      @media screen and (max-width: 767px) {
-        .circle-inf {
-          width: 100%;
-        }
-      }
-      .circle-inf__percent {
-        font-weight: 700;
-        font-size: 22px;
-        letter-spacing: 1px;
-        margin-bottom: 12px;
-        font-family: "Dosis", sans-serif;
-        position: relative;
-      }
-      .circle-inf__percent circle {
-        transform: rotate(180deg) scaleY(-1);
-        transform-origin: 50%;
-      }
-      .circle-inf__percent-txt {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-      .circle-inf__title {
-        font-family: "Dosis", sans-serif;
-        font-weight: 700;
-        letter-spacing: 2px;
-        font-size: 18px;
-      }
-    `;
-  }
-
-  constructor() {
-    super();
-    this.title = "TITLE";
-    this.percent = 25;
-    this.radio = 100;
-    this.swidth = 4;
-    this.scolor = "#cb2240";
-    this._dasharray = "" + Math.PI * this.radio * this.percent / 100 + " " + Math.PI * this.radio;
-  }
-
-  updated(changedProperties) {
-    if (changedProperties.get('radio') !== this.radio || changedProperties.get('percent') !== this.percent) {
-      this._dasharray = "" + Math.PI * this.radio * this.percent / 100 + " " + Math.PI * this.radio;
-    }
-  }
-
-  render() {
-    return html`
-      <div class="circle-inf">
-        <div class="circle-inf__percent">
-          <div class="circle-inf__percent-circle">
-            <svg width="${this.radio + this.swidth}" height="${this.radio + this.swidth}" 
-                viewBox="0 ${-this.swidth / 2} ${this.radio} ${this.radio + this.swidth}">
-              <circle cx="${this.radio / 2}" cy="${this.radio / 2}" 
-                      r="${this.radio / 2}" stroke="${this.scolor}" fill="none"
-                      stroke-width="${this.swidth}"
-                      stroke-dasharray="${this._dasharray}" />
-            </svg>     
-          </div>
-          <div class="circle-inf__percent-txt">
-            ${this.percent}%
-          </div>
-        </div>
-        <span class="circle-inf__title">${this.title}</span>
-      </div>
-    `;
-  }
-
-}
-
-window.customElements.define('circle-percent', CirclePercent);
-
-/**
- * `nav-list`
- * Nav List
- *
- * @customElement
- * @polymer
- * @litElement
- * @demo demo/index.html
- */
-
-class NavList extends LitElement {
-  static get properties() {
-    return {
-      list: {
-        type: String
-      },
-      listValues: {
-        type: Array
-      },
-      value: {
-        type: String
-      },
-      title: {
-        type: String
-      },
-      fixed: {
-        type: Boolean
-      }
-    };
-  }
-
-  static get styles() {
-    return css`
-      @media screen and (max-width: 767px) {
-        .navlist-labels {
-          width: 100%;
-        }
-      }
-      .navlist-labels__checkbox {
-        display: none;
-      }
-      .navlist-labels__checkbox:checked + .navlist-labels__txt {
-        border-color: #cc3743;
-        padding: 10px 13px;
-      }
-      .navlist-labels__title {
-        font-family: "Dosis", sans-serif;
-        font-weight: 700;
-        letter-spacing: 3px;
-        font-size: 16px;
-        margin-bottom: 10px;
-      }
-      .navlist-labels__group {
-        display: flex;
-        margin-bottom: 15px;
-      }
-      @media screen and (max-width: 992px) {
-        .navlist-labels__group {
-          justify-content: center;
-        }
-      }
-      .navlist-labels__group:last-child {
-        margin-bottom: 0;
-      }
-      .navlist-labels__item {
-        margin: 5px;
-        cursor: pointer;
-      }
-      .navlist-labels__item:first-child {
-        margin-left: 0;
-      }
-      .navlist-labels__txt {
-        display: block;
-        border: 2px solid transparent;
-        font-size: 14px;
-        padding: 10px 20px;
-        padding-left: 0;
-        border-radius: 50px;
-        transition: all 0.3s;
-        letter-spacing: 2px;
-      }
-    `;
-  }
-
-  constructor() {
-    super();
-    this.list = "0,1,2,3,4,5";
-    this.listValues = this.list.split(",");
-    this.value = null;
-    this.title = 'TITLE';
-    this.fixed = false;
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.listValues = this.list.split(",");
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-  }
-
-  updated() {
-    if (this.value) {
-      this.renderRoot.querySelector("[id='navlist-item__" + this.value + "']").checked = true;
-    }
-  }
-
-  _setValue(val) {
-    this.value = val;
-    this.dispatchEvent(new CustomEvent('navlist-changed', {
-      detail: val
-    }));
-  }
-
-  _getInput(val) {
-    let inputStr = !this.fixed ? html`<input type="radio" class="navlist-labels__checkbox" name="type1" id="navlist-item__${val}">` : html`<input type="radio" class="navlist-labels__checkbox" name="type1" id="navlist-item__${val}" disabled>`;
-    return inputStr;
-  }
-
-  _getSpan(val) {
-    let spanStr = !this.fixed ? html`<span class="navlist-labels__txt" @click="${() => this._setValue(val)}">&nbsp;${val}&nbsp;</span>` : html`<span class="navlist-labels__txt">&nbsp;${val}&nbsp;</span>`;
-    return spanStr;
-  }
-
-  _getListValues() {
-    return this.listValues.map(val => html`
-    <label class="navlist-labels__item">
-      ${this._getInput(val)}
-      ${this._getSpan(val)}
-    </label>`);
-  }
-
-  render() {
-    return html`
-      <div class="navlist-labels">
-        <div class="navlist-labels__title">${this.title}</div>
-        <div class="navlist-labels__group">
-          ${this._getListValues()}
-        </div>
-      </div>
-    `;
-  }
-
-}
-
-window.customElements.define('nav-list', NavList);
-
-/**
  * `element-card`
  * Element Card
  *
- * @customElement
+ * @customElement element-card
  * @polymer
  * @demo demo/index.html
  */
@@ -2826,91 +2565,36 @@ class ElementCard extends LitElement {
       description: {
         type: String
       },
-      navlist: {
-        type: String
-      },
-      circlepercent: {
-        type: String
-      },
       cover: {
         type: String
       },
       coverBgColor: {
-        type: String
+        type: String,
+        attribute: 'cover-bgcolor'
       },
       textColor: {
-        type: String
+        type: String,
+        attribute: 'text-color'
       },
       imgcover: {
-        type: String
+        type: String,
+        attribute: 'img-cover'
       }
     };
   }
 
-  constructor() {
-    super();
-    this.title = "Element-card";
-    this.description = "Description from element-card";
-    this.navlist = '{ "title": "NAVLIST", "value": "3", "list": "1,2,3,4,5", "fixed": "true" }';
-    this.circlepercent = '{ "percent": 75, "title": "PERCENT" }';
-    this.img_cover = html`<!--COVER-->`;
-    this.coverBgColor = "rgba(0, 0, 0, 0.7)";
-    this.textColor = "#FFF";
-  }
-
-  updated(mapVar) {
-    let imgcover = mapVar.get("imgcover");
-
-    if (!imgcover) {
-      this.img_cover = this.imgcover ? html`<img src="${this.imgcover}" alt="${this.title}">` : html`<!--COVER-->`;
-    }
-
-    let navlist = mapVar.get("navlist");
-
-    if (!navlist) {
-      this.navlist = JSON.parse(this.navlist);
-      this.circlepercent = JSON.parse(this.circlepercent);
-    }
-  }
-
-  firstUpdated() {
-    /* DELAY to apply css transform */
-    setTimeout(() => {
-      this.renderRoot.querySelector(".element-title").classList.add('showTitle');
-      this.renderRoot.querySelector(".element-desc").classList.add('showDesc');
-      this.renderRoot.querySelector(".element-ctr").classList.add('showDesc');
-
-      this._addSeparators();
-    }, 100);
-  }
-
-  _addSeparators() {
-    let children = Object.assign({}, this.children);
-    let counter = 1;
-
-    for (let ch in children) {
-      if (counter % 2 === 0) {
-        let d = document.createElement('span');
-        d.className = 'hr-vertical';
-        this.insertBefore(d, children[ch]);
-      }
-
-      counter++;
-    }
-  }
-
-  render() {
-    return html`
-    <style>
+  static get styles() {
+    return css`
       :host {
         display: block;
         font-family: "Uni Sans", sans-serif;
         font-weight: 500;
         margin: 30px;
+        font-size: var(--font-size, 16px);
       }
       .element-card {
         padding:60px 0 60px 0;
-        height: 100%;
+        /*height: 100%;*/
         display: flex;
         align-items: center;
         width: 100%;
@@ -2920,6 +2604,7 @@ class ElementCard extends LitElement {
         border-radius: 30px;
         box-shadow: 0 28px 79px 0 rgba(10, 22, 31, 0.35);
         max-width: 1200px;
+        font-size: 1rem;
       }
       @media screen and (max-width: 992px) {
         .element-card {
@@ -2941,11 +2626,13 @@ class ElementCard extends LitElement {
         display: block;
         object-fit: cover;
         opacity: 1;
-        background-color:${this.coverBgColor};
+        text-align: left;
+        padding: 15px;
       }
       .element-cover img {
         max-width: var(--imgcover-max-width, 100%);
         opacity: var(--imgcover-opacity, 1);
+        border-radius: 10px;
       }
 
       @media screen and (max-width: 767px) {
@@ -2954,7 +2641,7 @@ class ElementCard extends LitElement {
         }
       }
       .element-content {
-        color: ${this.textColor};
+        font-size:1rem;
         padding-top: 1px;
         position: relative;
         z-index: 2;
@@ -2988,8 +2675,8 @@ class ElementCard extends LitElement {
         margin: 0;
         margin-bottom: 10px;
         font-weight: 900;
-        font-size: 41px;
-        line-height: 1.2em;
+        font-size: 3rem;
+        line-height: 2.5rem;
         letter-spacing: 2px;
         opacity: 0;
         transform: translateY(-55px);
@@ -2997,29 +2684,29 @@ class ElementCard extends LitElement {
 
       @media screen and (max-width: 1200px) {
         .element-title {
-          font-size: 34px;
+          font-size: 2.125rem;
         }
       }
       @media screen and (max-width: 576px) {
         .element-title {
-          font-size: 24px;
+          font-size: 1.5rem;
         }
       }
       .element-desc {
         display: block;
-        font-size: 42px;
+        font-size: 2.625rem;
         opacity: 0;
         transform: translateY(-110px);
       }
 
       @media screen and (max-width: 1200px) {
         .element-desc {
-          font-size: 36px;
+          font-size: 2rem;
         }
       }
       @media screen and (max-width: 576px) {
         .element-desc {
-          font-size: 30px;
+          font-size: 1.2rem;
         }
       }
       .element-ctr {
@@ -3045,6 +2732,12 @@ class ElementCard extends LitElement {
         flex-shrink: 0;
         opacity: 0.5;
       }
+      ::slotted(:last-child) {
+        margin-top: 2rem;
+        grid-column-start: 1;
+        grid-column-end: 4;
+        font-size:1.5rem;
+      }
       @media screen and (max-width: 767px) {
         .element-ctr {
           grid-template-columns: 1fr;
@@ -3063,9 +2756,6 @@ class ElementCard extends LitElement {
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 30px;
       }
-      .element-inf {
-
-      }
 
       .showTitle {
         opacity: 1;
@@ -3077,29 +2767,83 @@ class ElementCard extends LitElement {
         transform: translateY(0px);
         transition: all 1s;
       }
-    </style>
+    `;
+  }
 
-    <div class="element-card">
-      <div class="element-cover">
-        ${this.img_cover}
-      </div>
-      <div class="element-content">
-        <h1 class="element-title">
-          ${this.title}
-        </h1>
-        <span class="element-desc">
-          ${this.description}
-        </span>
-        <div class="element-ctr">
-          <slot></slot>
+  constructor() {
+    super();
+    this.title = 'Element-card';
+    this.description = 'Description from element-card';
+    this.img_cover = html`<!--COVER-->`;
+    this.coverBgColor = 'rgba(0, 0, 0, 0.7)';
+    this.textColor = '#FFF';
+  }
+
+  firstUpdated() {
+    /* 100ms DELAY to apply css transform */
+    setTimeout(() => {
+      this.renderRoot.querySelector('.element-title').classList.add('showTitle');
+      this.renderRoot.querySelector('.element-desc').classList.add('showDesc');
+      this.renderRoot.querySelector('.element-ctr').classList.add('showDesc');
+
+      this._addSeparators();
+
+      if (this.imgcover) {
+        this.shadowRoot.querySelector('.element-cover').innerHTML = `<img src="${this.imgcover}" alt="${this.title}">`;
+      }
+    }, 100);
+  }
+
+  _addSeparators() {
+    let children = Object.assign({}, this.children);
+    let counter = 1;
+
+    for (let ch in children) {
+      if (children.hasOwnProperty(ch)) {
+        if (counter % 2 === 0) {
+          let d = document.createElement('span');
+          d.className = 'hr-vertical';
+          this.insertBefore(d, children[ch]);
+        }
+
+        counter++;
+      }
+    }
+  }
+
+  render() {
+    return html`
+      <style>
+        .element-cover {
+          background-color:${this.coverBgColor};
+        }
+        .element-content {
+          color: ${this.textColor};
+        }
+        .element-desc, .element-title {
+          text-align: ${this.imgcover ? 'center' : 'left'};
+        }
+      </style>
+      <div class="element-card">
+        <div class="element-cover">
+          ${this.img_cover}
+        </div>
+        <div class="element-content">
+          <h1 class="element-title">
+            ${this.title}
+          </h1>
+          <span class="element-desc">
+            ${this.description}
+          </span>
+          <div class="element-ctr">
+            <slot></slot>
+          </div>
         </div>
       </div>
-    </div>
     `;
   }
 
 }
-window.customElements.define('element-card', ElementCard);
 
-export { ElementCard };
+window.customElements.define('element-card', ElementCard);
 //# sourceMappingURL=element-card.js.map
