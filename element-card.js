@@ -113,7 +113,7 @@ class ElementCard extends LitElement {
         margin-bottom: 10px;
         font-weight: 900;
         font-size: 3rem;
-        line-height: 1.2rem;
+        line-height: 2.5rem;
         letter-spacing: 2px;
         opacity: 0;
         transform: translateY(-55px);
