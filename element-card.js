@@ -138,7 +138,7 @@ class ElementCard extends LitElement {
 
       @media screen and (max-width: 1200px) {
         .element-desc {
-          font-size: 2rem;
+          font-size: calc(var(--fsize-element-desc, 2.625rem)*0.762;
         }
       }
       @media screen and (max-width: 576px) {
@@ -173,7 +173,7 @@ class ElementCard extends LitElement {
         margin-top: 2rem;
         grid-column-start: 1;
         grid-column-end: 4;
-        font-size:1.5rem;
+        font-size:var(--fsize-element-base, 1rem);
       }
       @media screen and (max-width: 767px) {
         .element-ctr {
