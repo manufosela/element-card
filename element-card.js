@@ -138,7 +138,7 @@ class ElementCard extends LitElement {
 
       @media screen and (max-width: 1200px) {
         .element-desc {
-          font-size: calc(var(--fsize-element-desc, 2.625rem)*0.762;
+          font-size: calc(var(--fsize-element-desc, 2.625rem)*0.762);
         }
       }
       @media screen and (max-width: 576px) {
