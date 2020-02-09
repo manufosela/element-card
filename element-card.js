@@ -41,7 +41,7 @@ class ElementCard extends LitElement {
         border-radius: 30px;
         box-shadow: 0 28px 79px 0 rgba(10, 22, 31, 0.35);
         max-width: 1200px;
-        font-size: 1rem;
+        font-size: var(--fsize-element-base, 1rem);
       }
       @media screen and (max-width: 992px) {
         .element-card {
@@ -78,7 +78,7 @@ class ElementCard extends LitElement {
         }
       }
       .element-content {
-        font-size:1rem;
+        font-size: var(--fsize-element-base, 1rem);
         padding-top: 1px;
         position: relative;
         z-index: 2;
@@ -112,7 +112,7 @@ class ElementCard extends LitElement {
         margin: 0;
         margin-bottom: 10px;
         font-weight: 900;
-        font-size: 3rem;
+        font-size: var(--fsize-element-title, 3rem);
         line-height: 2.5rem;
         letter-spacing: 2px;
         opacity: 0;
@@ -121,17 +121,17 @@ class ElementCard extends LitElement {
 
       @media screen and (max-width: 1200px) {
         .element-title {
-          font-size: 2.125rem;
+          font-size: calc(var(--fsize-element-title, 3rem)*0.7083);
         }
       }
       @media screen and (max-width: 576px) {
         .element-title {
-          font-size: 1.5rem;
+          font-size: calc(var(--fsize-element-title, 3rem)*0.5);
         }
       }
       .element-desc {
         display: block;
-        font-size: 2.625rem;
+        font-size: var(--fsize-element-desc, 2.625rem);
         opacity: 0;
         transform: translateY(-110px);
       }
@@ -143,7 +143,7 @@ class ElementCard extends LitElement {
       }
       @media screen and (max-width: 576px) {
         .element-desc {
-          font-size: 1.2rem;
+          font-size: calc(var(--fsize-element-desc, 2.625rem)*0.457);
         }
       }
       .element-ctr {

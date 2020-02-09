@@ -29,6 +29,9 @@
 ## CSS Variables
 --imgcover-max-width
 --imgcover-opacity
+--fsize-element-title
+--fsize-element-desc
+--font-size
 
 ## Install the Polymer-CLI
 
