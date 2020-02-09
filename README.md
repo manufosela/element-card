@@ -31,6 +31,7 @@
 --imgcover-opacity
 --fsize-element-title
 --fsize-element-desc
+--fsize-element-base
 --font-size
 
 ## Install the Polymer-CLI
